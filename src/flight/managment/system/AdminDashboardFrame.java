@@ -21,6 +21,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
     public AdminDashboardFrame() {
         initComponents();
         configDisplay();
+        openAllFlightPage();
     }
 
     /**
@@ -64,11 +65,21 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         jMenuBar1.add(allFlightList);
 
         allCustomerList.setText("Customer");
+        allCustomerList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                allCustomerListMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(allCustomerList);
 
         jMenu3.setText("Setting");
 
         jMenuItem2.setText("Logout");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem2);
 
         jMenuBar1.add(jMenu3);
@@ -90,9 +101,17 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void allFlightListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allFlightListMouseClicked
-       FlightListPanel flightListPanel= new FlightListPanel();
-        switchPanel(flightListPanel);
+        openAllFlightPage();
     }//GEN-LAST:event_allFlightListMouseClicked
+
+    private void allCustomerListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allCustomerListMouseClicked
+        CustomerListPanel customerListPanel = new CustomerListPanel();
+        switchPanel(customerListPanel);
+    }//GEN-LAST:event_allCustomerListMouseClicked
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        System.err.println("Logout");
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void configDisplay() {
         this.setPreferredSize(new Dimension(1366, 700));
@@ -119,4 +138,9 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private void openAllFlightPage() {
+        FlightListPanel flightListPanel = new FlightListPanel();
+        switchPanel(flightListPanel);
+    }
 }

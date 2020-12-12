@@ -18,6 +18,7 @@ public class LoginAndSignUpFrame extends javax.swing.JFrame {
      * Creates new form LoginAndSignUpFrame
      */
     public LoginAndSignUpFrame() {
+        new MySqlConfigration();
         configDisplay();
         initComponents();
     }
@@ -264,12 +265,13 @@ public class LoginAndSignUpFrame extends javax.swing.JFrame {
     }
     
     private void login() {
-        this.setVisible(false);
-        if (userNameEditText.getText().toLowerCase().equals("admin")
-                && passwordEditText.getText().toLowerCase().equals("admin")) {
-            new AdminDashboardFrame().setVisible(true);
-        } else {            
-            new UserDashboardFrame().setVisible(true);
-        }
+        System.err.println(MySqlConfigration.connect());
+//        this.setVisible(false);
+//        if (userNameEditText.getText().toLowerCase().equals("admin")
+//                && passwordEditText.getText().toLowerCase().equals("admin")) {
+//            new AdminDashboardFrame().setVisible(true);
+//        } else {            
+//            new UserDashboardFrame().setVisible(true);
+//        }
     }
 }
