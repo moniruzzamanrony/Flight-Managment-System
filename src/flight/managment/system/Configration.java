@@ -5,6 +5,7 @@
  */
 package flight.managment.system;
 
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -14,7 +15,9 @@ import java.util.UUID;
 public class Configration {
 
     public static String getRendomId() {
-        return UUID.randomUUID().toString();
+        Random ran = new Random();
+        int x = ran.nextInt(6) + 5;
+        return String.valueOf(x);
     }
 
 }

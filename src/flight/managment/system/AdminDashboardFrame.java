@@ -37,6 +37,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         basePanel = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         allFlightList = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         allCustomerList = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -62,6 +63,15 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
                 allFlightListMouseClicked(evt);
             }
         });
+
+        jMenuItem1.setText("Add New Flight");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        allFlightList.add(jMenuItem1);
+
         jMenuBar1.add(allFlightList);
 
         allCustomerList.setText("Customer");
@@ -73,6 +83,11 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         jMenuBar1.add(allCustomerList);
 
         jMenu3.setText("Setting");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
 
         jMenuItem2.setText("Logout");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -110,8 +125,17 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_allCustomerListMouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        System.err.println("Logout");
+        this.setVisible(false);
+        new LoginAndSignUpFrame().setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        switchPanel(new ReleaseFlightPanel());
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+
+    }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void configDisplay() {
         this.setPreferredSize(new Dimension(1366, 700));
@@ -135,6 +159,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JPanel basePanel;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

@@ -5,7 +5,13 @@
  */
 package flight.managment.system;
 
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
 import java.awt.Dimension;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -184,7 +190,7 @@ public class LoginAndSignUpFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButActionPerformed
-      login();
+        login();
     }//GEN-LAST:event_loginButActionPerformed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -252,7 +258,7 @@ public class LoginAndSignUpFrame extends javax.swing.JFrame {
     }
 
     private void configDisplay() {
-        this.setPreferredSize(new Dimension(790, 586)); 
+        this.setPreferredSize(new Dimension(790, 586));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.pack(); // give a suitable size to window automatically
@@ -263,15 +269,37 @@ public class LoginAndSignUpFrame extends javax.swing.JFrame {
         this.setVisible(false);
         new ForgetPasswordFrame().setVisible(true);
     }
-    
+
     private void login() {
-        System.err.println(MySqlConfigration.connect());
-//        this.setVisible(false);
-//        if (userNameEditText.getText().toLowerCase().equals("admin")
-//                && passwordEditText.getText().toLowerCase().equals("admin")) {
-//            new AdminDashboardFrame().setVisible(true);
-//        } else {            
-//            new UserDashboardFrame().setVisible(true);
-//        }
+
+        String userName = userNameEditText.getText();
+        String password = passwordEditText.getText();
+        if (userName == null || password == null) {
+        } else {
+            this.setVisible(false);
+            if (userName.toLowerCase().equals("admin")
+                    && password.toLowerCase().equals("admin")) {
+                new AdminDashboardFrame().setVisible(true);
+            } else {
+                Connection conn = MySqlConfigration.connect();
+
+                try {
+                    Statement statement = (Statement) conn.createStatement();
+                    ResultSet resultSet = statement.executeQuery("Select * From user");
+
+                    while (resultSet.next()) {
+                        if (resultSet.getString("userName").equals(userName)
+                                && resultSet.getString("password").equals(password)) {
+                            new UserDashboardFrame().setVisible(true);
+                        }
+
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(LoginAndSignUpFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }
+
     }
 }

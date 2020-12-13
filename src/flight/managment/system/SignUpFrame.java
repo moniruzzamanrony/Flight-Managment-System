@@ -11,6 +11,7 @@ import static flight.managment.system.MySqlConfigration.connect;
 import static flight.managment.system.MySqlConfigration.disconnect;
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -270,10 +271,14 @@ public class SignUpFrame extends javax.swing.JFrame {
         Connection connection = MySqlConfigration.connect();
         try {
             Statement statement = (Statement) connect().createStatement();
-            statement.execute("INSERT INTO user(userId,fName,lName,address,zip,userName,state,email,password,ssn,bfName) VALUES ('fgdfg','fghfgh','fghfgh','gfhfgh','gfhfghfg','fghfh','fghfh','fghfgh','fghfgh','fghfgh','fghfgh');" );
+            statement.execute("INSERT INTO user(userId,fName,lName,address,zip,userName,state,email,password,ssn,bfName) "
+                    + "VALUES ('"+ Configration.getRendomId() +"','"+ fNameEditText.getText()+"','"+ lNameEditText.getText()+"','"+ addressEditText.getText() +"','"+zipEditText.getText()+"','"+userNameEditText.getText()+"','"+stateEditText.getText()+"','"+emailEditText.getText()+"','"+passwordEditText.getText()+"','"+ ssnEditText.getText()+"','"+passwordEditText.getText()+"');" );
             statement.close();
             MySqlConfigration.disconnect();
+            this.setVisible(false);
+            new LoginAndSignUpFrame().setVisible(true);
         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Somthing is worng");
             System.err.println(ex);
         }
     }
