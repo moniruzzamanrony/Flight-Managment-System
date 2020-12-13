@@ -290,6 +290,7 @@ public class LoginAndSignUpFrame extends javax.swing.JFrame {
                     while (resultSet.next()) {
                         if (resultSet.getString("userName").equals(userName)
                                 && resultSet.getString("password").equals(password)) {
+                            LoggedUserDetails.loggedUserId = resultSet.getString("userId"); 
                             new UserDashboardFrame().setVisible(true);
                         }
 

@@ -129,14 +129,13 @@ public class FlightListPanel extends javax.swing.JPanel {
             String selectedFlightId = flightJtable.getValueAt(row, 0).toString();
             String[] choices = {"Delete", "Update"};
             String input = (String) JOptionPane.showInputDialog(null, "Please, make your choice", "Setting", JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
-            
-            switch(input.toLowerCase())
-            {
-                case "delete": 
+
+            switch (input.toLowerCase()) {
+                case "delete":
                     deleteFlightByFlightId(selectedFlightId);
                     break;
-                case "update": 
-                     updateFlightByFlightId(selectedFlightId);
+                case "update":
+                    updateFlightByFlightId(selectedFlightId);
                     break;
                 default:
                     break;
@@ -150,15 +149,14 @@ public class FlightListPanel extends javax.swing.JPanel {
     }
 
     public void showItemList() {
-       DefaultTableModel model = new DefaultTableModel(new String[]{"Flight Id","Flight Title","From","To","Date","Time","Description"}, 0);
-            Connection conn = MySqlConfigration.connect();
-
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Flight Id", "Flight Title", "From", "To", "Date", "Time", "Description"}, 0);
+        Connection conn = MySqlConfigration.connect();
         try {
             Statement statement = (Statement) conn.createStatement();
             ResultSet resultSet = statement.executeQuery("Select * From flight");
-                
+
             while (resultSet.next()) {
-               model.addRow(new String[]{resultSet.getString("flightId"),resultSet.getString("flightTitle"),resultSet.getString("from"),resultSet.getString("to"),resultSet.getString("date"),resultSet.getString("time"),resultSet.getString("description")});
+                model.addRow(new String[]{resultSet.getString("flightId"), resultSet.getString("flightTitle"), resultSet.getString("flightFrom"), resultSet.getString("flightTo"), resultSet.getString("flightDate"), resultSet.getString("flightTime"), resultSet.getString("description")});
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginAndSignUpFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -166,8 +164,7 @@ public class FlightListPanel extends javax.swing.JPanel {
 
         flightJtable.setModel(model);
 
-
-}
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable flightJtable;
     private javax.swing.JLabel jLabel1;
@@ -176,10 +173,10 @@ public class FlightListPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void deleteFlightByFlightId(String selectedFlightId) {
-           Connection connection = MySqlConfigration.connect();
+        Connection connection = MySqlConfigration.connect();
         try {
             Statement statement = (Statement) connect().createStatement();
-            statement.execute("Delete FROM flight WHERE flightId = '"+selectedFlightId+"'");
+            statement.execute("Delete FROM flight WHERE flightId = '" + selectedFlightId + "'");
             statement.close();
             MySqlConfigration.disconnect();
             JOptionPane.showMessageDialog(null, "Successful");

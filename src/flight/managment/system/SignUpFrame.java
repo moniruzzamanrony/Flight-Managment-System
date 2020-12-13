@@ -260,7 +260,7 @@ public class SignUpFrame extends javax.swing.JFrame {
 
     private void configDisplay() {
 
-        this.setPreferredSize(new Dimension(790, 650)); 
+        this.setPreferredSize(new Dimension(790, 650));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.pack(); // give a suitable size to window automatically
@@ -272,7 +272,7 @@ public class SignUpFrame extends javax.swing.JFrame {
         try {
             Statement statement = (Statement) connect().createStatement();
             statement.execute("INSERT INTO user(userId,fName,lName,address,zip,userName,state,email,password,ssn,bfName) "
-                    + "VALUES ('"+ Configration.getRendomId() +"','"+ fNameEditText.getText()+"','"+ lNameEditText.getText()+"','"+ addressEditText.getText() +"','"+zipEditText.getText()+"','"+userNameEditText.getText()+"','"+stateEditText.getText()+"','"+emailEditText.getText()+"','"+passwordEditText.getText()+"','"+ ssnEditText.getText()+"','"+passwordEditText.getText()+"');" );
+                    + "VALUES ('" + Configration.getRendomId() + "','" + fNameEditText.getText() + "','" + lNameEditText.getText() + "','" + addressEditText.getText() + "','" + zipEditText.getText() + "','" + userNameEditText.getText() + "','" + stateEditText.getText() + "','" + emailEditText.getText() + "','" + passwordEditText.getText() + "','" + ssnEditText.getText() + "','" + passwordEditText.getText() + "');");
             statement.close();
             MySqlConfigration.disconnect();
             this.setVisible(false);
@@ -282,7 +282,7 @@ public class SignUpFrame extends javax.swing.JFrame {
             System.err.println(ex);
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea addressEditText;
     private javax.swing.JButton backBut;
@@ -310,6 +310,5 @@ public class SignUpFrame extends javax.swing.JFrame {
     private javax.swing.JTextField userNameEditText;
     private javax.swing.JTextField zipEditText;
     // End of variables declaration//GEN-END:variables
-
 
 }

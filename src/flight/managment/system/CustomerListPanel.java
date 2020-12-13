@@ -7,6 +7,7 @@ package flight.managment.system;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
+import static flight.managment.system.MySqlConfigration.connect;
 import java.awt.Dimension;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -113,15 +114,12 @@ public class CustomerListPanel extends javax.swing.JPanel {
         int col = customerListJTable.columnAtPoint(evt.getPoint());
         if (row >= 0 && col >= 0) {
             String selectedFlightId = customerListJTable.getValueAt(row, 0).toString();
-            String[] choices = {"Delete", "Update"};
+            String[] choices = {"Delete"};
             String input = (String) JOptionPane.showInputDialog(null, "Please, make your choice", "Setting", JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
 
             switch (input.toLowerCase()) {
                 case "delete":
                     deleteFlightByUserId(selectedFlightId);
-                    break;
-                case "update":
-                    updateFlightByUserId(selectedFlightId);
                     break;
                 default:
                     break;
@@ -159,7 +157,20 @@ public class CustomerListPanel extends javax.swing.JPanel {
     }
 
     private void deleteFlightByUserId(String selectedFlightId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        Connection connection = MySqlConfigration.connect();
+        try {
+            Statement statement = (Statement) connect().createStatement();
+            statement.execute("Delete FROM user WHERE usetId = '" + selectedFlightId + "'");
+            statement.close();
+            MySqlConfigration.disconnect();
+            JOptionPane.showMessageDialog(null, "Successful");
+            loadDatafromDatabase();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Somthing is worng");
+            System.err.println(ex);
+
+        }
     }
 
     private void updateFlightByUserId(String selectedFlightId) {

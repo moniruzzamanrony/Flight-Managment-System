@@ -48,16 +48,16 @@ public class MySqlConfigration {
     }
 
     private void createTable() {
-
         ArrayList<String> queryList = new ArrayList<String>();
         queryList.add("CREATE TABLE IF NOT EXISTS `user` ( userId VARCHAR (20),fName VARCHAR(20),lName VARCHAR(20),address VARCHAR(200),zip VARCHAR(20),userName VARCHAR(20),state VARCHAR(20),email VARCHAR(20),password VARCHAR(20),ssn VARCHAR(20),bfName VARCHAR(20));");
-        queryList.add("CREATE TABLE IF NOT EXISTS `flight` ( flightId VARCHAR (20),flightTitle VARCHAR(20),`from` VARCHAR(20),`to` VARCHAR(20),`price` VARCHAR(20),`date` VARCHAR(20),`time` VARCHAR(20),description VARCHAR(200));");        
+        queryList.add("CREATE TABLE IF NOT EXISTS `flight` ( flightId VARCHAR (20),flightTitle VARCHAR(20),`flightFrom` VARCHAR(20),`flightTo` VARCHAR(20),`price` VARCHAR(20),`flightDate` VARCHAR(20),`flightTime` VARCHAR(20),description VARCHAR(200),seat VARCHAR(200));");
+        queryList.add("CREATE TABLE IF NOT EXISTS `flight_user` (userId VARCHAR (20),flightId VARCHAR(20));");
         try {
-            for(String query : queryList){
-            Statement statement = (Statement) connect().createStatement();
-            statement.execute(query);
-            statement.close();
-            disconnect();
+            for (String query : queryList) {
+                Statement statement = (Statement) connect().createStatement();
+                statement.execute(query);
+                statement.close();
+                disconnect();
             }
         } catch (Exception ex) {
             System.err.println(ex);
