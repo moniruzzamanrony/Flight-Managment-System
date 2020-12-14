@@ -269,7 +269,7 @@ public class SearchFlightInternalPanel extends javax.swing.JPanel {
             ResultSet resultSet = statement.executeQuery("Select * From flight WHERE flightFrom = '" + from + "' AND flightTo = '" + to + "' AND flightDate = '" + date + "'");
 
             while (resultSet.next()) {
-                
+
                 model.addRow(new String[]{resultSet.getString("flightId"), resultSet.getString("flightTitle"), resultSet.getString("flightFrom"), resultSet.getString("flightTo"), resultSet.getString("flightDate"), resultSet.getString("flightTime"), resultSet.getString("description")});
             }
 
